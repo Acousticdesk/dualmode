@@ -1,6 +1,6 @@
 {
   "name": "dualmode",
-  "version": "1.0.1-alpha.1",
+  "version": "1.0.1-alpha.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,10 +15,5 @@
   "dependencies": {
     "esbuild": "0.25.0",
     "glob": "11.0.1"
-  },
-  "exports": {
-    "require": "./js/build.cjs",
-    "import": "./build.mjs",
-    "default": "./js/build.cjs"
   }
 }

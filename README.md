@@ -5,15 +5,11 @@ DualMode is a versatile build tool that supports both CommonJS and ES modules, a
 ## Table of Contents
 
 1. [Installation](#installation)
-2. [Getting Started](#getting-started)
-3. [Usage](#usage)
-   - [As a CLI Tool](#as-a-cli-tool)
-   - [As a Module](#as-a-module)
-4. [API Reference](#api-reference)
-5. [Configuration](#configuration)
-6. [Examples](#examples)
-7. [Contributing](#contributing)
-8. [License](#license)
+2. [Usage](#usage)
+3. [API Reference](#api-reference)
+4. [Configuration](#configuration)
+5. [Contributing](#contributing)
+6. [License](#license)
 
 ## Installation
 
@@ -23,33 +19,13 @@ To install DualMode, run the following command in your project directory:
 npm install dualmode
 ```
 
-## Getting Started
-
-After installation, you can use DualMode either as a CLI tool or as a module in your JavaScript projects.
-
-### CLI Usage
+## Usage
 
 DualMode provides a CLI tool named `build`. You can use it directly from the command line:
 
 ```bash
 npx build [options]
 ```
-
-### Module Usage
-
-You can also import DualMode in your JavaScript files:
-
-```javascript
-// ESM
-import build from 'dualmode';
-
-// CommonJS
-const build = require('dualmode');
-```
-
-## Usage
-
-### As a CLI Tool
 
 The `build` command allows you to compile your JavaScript files. Here are some examples:
 
@@ -62,43 +38,32 @@ npx build --input src --output dist
 
 # Watch for changes and rebuild
 npx build --watch
-```
 
-### As a Module
+# Bundle and minify
+npx build --bundle --minify
 
-You can use DualMode programmatically in your Node.js scripts:
-
-```javascript
-import build from 'dualmode';
-
-async function runBuild() {
-  try {
-    await build({
-      entryPoints: ['src/**/*.js'],
-      outdir: 'dist',
-      bundle: true,
-      minify: true,
-    });
-    console.log('Build completed successfully!');
-  } catch (error) {
-    console.error('Build failed:', error);
-  }
-}
-
-runBuild();
+# Specify target environment
+npx build --target es2020,node14
 ```
 
 ## API Reference
 
-The main `build` function accepts an options object with the following properties:
+The `build` command accepts the following options:
 
-- `entryPoints`: An array of glob patterns for input files
-- `outdir`: The output directory for compiled files
-- `bundle`: Boolean, whether to bundle dependencies
-- `minify`: Boolean, whether to minify the output
-- `watch`: Boolean, whether to watch for file changes
+- `--input`: Specify the input directory or file(s)
+- `--output`: Specify the output directory
+- `--bundle`: Bundle dependencies
+- `--minify`: Minify the output
+- `--watch`: Watch for file changes and rebuild
+- `--target`: Specify the target environment (e.g., es2020,node14)
 
-For a complete list of options, refer to the [esbuild documentation](https://esbuild.github.io/api/), as DualMode uses esbuild under the hood.
+For a complete list of options, run:
+
+```bash
+npx build --help
+```
+
+DualMode uses esbuild under the hood. For more detailed information about the available options, you can refer to the [esbuild documentation](https://esbuild.github.io/api/).
 
 ## Configuration
 
@@ -114,36 +79,6 @@ module.exports = {
 };
 ```
 
-## Examples
-
-### Building a React App
-
-```javascript
-import build from 'dualmode';
-
-build({
-  entryPoints: ['src/App.jsx'],
-  outdir: 'dist',
-  bundle: true,
-  minify: true,
-  loader: { '.jsx': 'jsx' },
-  define: { 'process.env.NODE_ENV': '"production"' },
-});
-```
-
-### Building a Node.js Server
-
-```javascript
-import build from 'dualmode';
-
-build({
-  entryPoints: ['server.js'],
-  outdir: 'dist',
-  platform: 'node',
-  target: 'node14',
-  external: ['express'],
-});
-```
 
 ## Contributing
 

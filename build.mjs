@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import esbuild from "esbuild";
 import { globSync } from "glob";
 import { RewriteImportsPlugin } from "./build.rewrite-imports.mjs";
