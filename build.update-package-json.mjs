@@ -18,7 +18,7 @@ export function updatePackageJson(config) {
     fs.writeFileSync(jsonPath, JSON.stringify(json, null, 2));
   } catch (error) {
     console.error(
-      `Error reading ${jsonPath}. Please run the script from the root of your project.`
+      `Error reading ${jsonPath}. Please run the script from the root of your project where your package.json is located.`
     );
   }
 }

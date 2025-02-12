@@ -7,17 +7,29 @@ import { updatePackageJson } from "./build.update-package-json.mjs";
 import fs from "fs";
 import path from "path";
 
-const configPath = path.resolve(process.cwd(), ".dualmoderc");
+const configFileName = "dualmode.config.json";
+const configPath = path.resolve(process.cwd());
 
-let config = {};
+const defaultConfig = {
+  esbuild: {
+    entryPoints: {
+      ignore: ["./node_modules/**/*"],
+    },
+  },
+};
+
+let config;
 
 if (!fs.existsSync(configPath)) {
   console.warn(
-    `No .env.dualmode file found in ${configPath}. Proceeding with a default configuration.`
+    `${configPath} not found. Proceeding with the default configuration. See https://www.npmjs.com/package/dualmode for more information.`,
+    config
   );
+
+  config = defaultConfig;
 } else {
   config = JSON.parse(fs.readFileSync(configPath));
-  console.log("Using custom configuration from .env.dualmode:", config);
+  console.log(`Using custom configuration from ${configFileName}:`, config);
 }
 
 esbuild
@@ -28,10 +40,10 @@ esbuild
     bundle: false,
     plugins: [new RewriteImportsPlugin()],
     ...config.esbuild,
-    entryPoints: globSync("./**/*.mjs", {
-      ignore: ["./node_modules/**/*", "./tests/**/*", "./build/**/*"],
-      ...config.esbuild?.entryPoints,
-    }),
+    entryPoints: globSync(
+      "./**/*.mjs",
+      config.esbuild?.entryPoints || defaultConfig.esbuild.entryPoints
+    ),
   })
   .catch((err) => {
     console.error(err);

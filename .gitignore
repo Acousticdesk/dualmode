@@ -3,5 +3,5 @@ package-lock.json
 .npmrc
 .env.dualmode
 cjs
-.dualmoderc
+dualmode.config.json
 .aider*
