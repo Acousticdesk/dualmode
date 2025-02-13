@@ -8,7 +8,7 @@ import fs from "fs";
 import path from "path";
 
 const configFileName = "dualmode.config.json";
-const configPath = path.resolve(process.cwd());
+const configPath = path.resolve(process.cwd(), configFileName);
 
 const defaultConfig = {
   esbuild: {
@@ -22,14 +22,16 @@ let config;
 
 if (!fs.existsSync(configPath)) {
   console.warn(
-    `${configPath} not found. Proceeding with the default configuration. See https://www.npmjs.com/package/dualmode for more information.`,
-    config
+    `${configPath} not found. Proceeding with the default configuration. See https://www.npmjs.com/package/dualmode for more information.`
   );
+
+  console.dir(defaultConfig, { depth: null });
 
   config = defaultConfig;
 } else {
   config = JSON.parse(fs.readFileSync(configPath));
-  console.log(`Using custom configuration from ${configFileName}:`, config);
+  console.log(`Using custom configuration from ${configFileName}:`);
+  console.dir(config, { depth: null });
 }
 
 esbuild
