@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "build": "build.mjs"
+    "build": "build.mjs",
+    "dualmode": "build.mjs"
   },
   "keywords": [],
   "author": "",

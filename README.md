@@ -18,7 +18,9 @@ DualMode is a build tool designed to support the use of modern npm packages buil
 
 ## Installation
 
-DualMode is designed to be used as a development dependency. You don't need to install it globally or in your project. Instead, you'll use it directly via `npx`.
+```
+npm i dualmode
+```
 
 ## Usage
 
@@ -29,7 +31,7 @@ To use DualMode, add the following script to your `package.json`:
 ```json
 {
   "scripts": {
-    "build": "npx -p dualmode@latest build"
+    "build": "npx dualmode"
   }
 }
 ```
