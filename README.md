@@ -19,7 +19,7 @@ DualMode is a build tool designed to support the use of modern npm packages buil
 ## Installation
 
 ```
-npm i dualmode
+npm install --save-dev dualmode
 ```
 
 ## Usage
